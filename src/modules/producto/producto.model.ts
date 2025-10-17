@@ -22,12 +22,23 @@ import ProductoPack from "../productoPack/productoPack.model";
   // Deben ser creados en una migración.
 })
 class Producto extends Model {
+  // 1. AÑADE UN ID NUMÉRICO COMO LLAVE PRIMARIA
+  @Column({
+    type: DataType.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  })
+  declare id: number;
+
+  // 2. MANTIENE TU CÓDIGO, PERO AHORA ES ÚNICO, NO PRIMARIO
   @Column({
     type: DataType.STRING(50),
-    primaryKey: true,
+    allowNull: false,
+    unique: true, // <-- ¡Importante!
   })
   declare codigo_int_prod: string;
 
+  // ... el resto de tus columnas permanecen igual ...
   @Column({
     type: DataType.STRING(50),
     allowNull: false,
@@ -37,8 +48,8 @@ class Producto extends Model {
   @Column(DataType.STRING(50))
   declare descripcion: string;
 
-  @Column(DataType.STRING(100))
-  declare caract_tec: string;
+  @Column(DataType.BOOLEAN)
+  declare caract_tec: boolean;
 
   @Column(DataType.STRING(100))
   declare origen: string;
@@ -55,8 +66,8 @@ class Producto extends Model {
   @Column(DataType.STRING(3))
   declare u_medida: string;
 
-  @Column(DataType.STRING(3))
-  declare estado: boolean;
+  @Column(DataType.BOOLEAN)
+  declare active: boolean;
 
   @Column({
     type: DataType.DECIMAL(9, 0),

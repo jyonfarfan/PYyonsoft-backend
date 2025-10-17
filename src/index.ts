@@ -9,10 +9,10 @@ async function startApp() {
     // 1. Primero, intentamos conectar y sincronizar la base de datos.
     await db.authenticate();
     await db.sync();
+    // await db.sync({ force: true }); //({ force: true }) si querés reiniciar las tablas
     console.log(
       colors.green.bold("🟢 Conexión y sincronización de BBDD exitosa.")
     );
-    // await db.sync({ force: true }); //({ force: true }) si querés reiniciar las tablas
 
     // 2. Si la conexión es exitosa, iniciamos el servidor.
     server.listen(port, () => {
